@@ -7,9 +7,11 @@ public class MatchmakingHub(IGrainFactory grainFactory) : Hub
 {
     public override async Task OnConnectedAsync()
     {
+        // add player to the matchmaking queue as soon as they connect
         await QuickMatch();
         await base.OnConnectedAsync();
     }
+
     public async Task QuickMatch()
     {
         var matchmaking = grainFactory.GetGrain<IMatchmakerGrain>("QuickMatch");
